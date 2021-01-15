@@ -13,8 +13,6 @@ public class BoardManager : MonoBehaviour
 
     public bool isShifting { get; set; }
 
-    private Candy selectedCandy;
-
     public const int MinCandiesToMatch = 2;
 
     [SerializeField] GameObject square;
@@ -117,6 +115,7 @@ public class BoardManager : MonoBehaviour
             {
                 nullCandies++;
                 GUIManager.sharedInstance.Score += nullCandies;
+                GameTimer.sharedInstance.levelTime += nullCandies;
             }
             renderes.Add(spriteRenderer);
         }

@@ -9,8 +9,9 @@ public class GUIManager : MonoBehaviour
 {
     public static GUIManager sharedInstance;
     [SerializeField] Text moveText, scoreText;
-    private int moveCounter = 30;
+    private int moveCounter = 0;
     private int score = 0;
+    private int movesToSpeedTime = 10;
 
     private void Awake()
     {
@@ -36,14 +37,18 @@ public class GUIManager : MonoBehaviour
         set 
         {
             moveCounter = value; 
-            moveText.text = "Moves: " + moveCounter.ToString(); 
+            moveText.text = "Moves: " + moveCounter.ToString();
 
-            if (moveCounter <= 0)
+            if (moveCounter % movesToSpeedTime == 0)
             {
-                moveCounter = 0;
-                StartCoroutine(GameOverScene());
+                GameTimer.sharedInstance.discountedTime++;
             }
         }
+    }
+
+    public void LevelTimerFinished()
+    {
+        StartCoroutine(GameOverScene());
     }
 
     private IEnumerator GameOverScene()
