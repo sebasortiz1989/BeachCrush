@@ -11,7 +11,7 @@ public class GUIManager : MonoBehaviour
     [SerializeField] Text moveText, scoreText;
     private int moveCounter = 0;
     private int score = 0;
-    private int movesToSpeedTime = 10;
+    private int movesToSpeedTime = 3;
 
     private void Awake()
     {
@@ -41,7 +41,7 @@ public class GUIManager : MonoBehaviour
 
             if (moveCounter % movesToSpeedTime == 0)
             {
-                GameTimer.sharedInstance.discountedTime++;
+                GameTimer.sharedInstance.timeBeforeDiscount = GameTimer.sharedInstance.timeBeforeDiscount*0.9f;
             }
         }
     }
@@ -69,7 +69,7 @@ public class GUIManager : MonoBehaviour
 
     public void ScoreScene()
     {
-        SceneManager.LoadScene("ScoresScene");
+        SceneManager.LoadScene("ScoreScene");
     }
 
     public void MainScene()

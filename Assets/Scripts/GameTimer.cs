@@ -9,7 +9,7 @@ public class GameTimer : MonoBehaviour
     [Tooltip("Our Level timer is in seconds")]
     public float levelTime = 30;
     Slider slider;
-    public float discountedTime = 1f;
+    public float timeBeforeDiscount = 1f;
 
     private void Awake()
     {
@@ -31,8 +31,8 @@ public class GameTimer : MonoBehaviour
     {
         while (levelTime > 0)
         {
-            yield return new WaitForSeconds(1f);
-            levelTime = levelTime - discountedTime;
+            yield return new WaitForSeconds(timeBeforeDiscount);
+            levelTime--;
 
             slider.value = levelTime;
         }
